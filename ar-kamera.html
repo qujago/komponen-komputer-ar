@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta viewport khusus AR agar layar tidak bisa di-zoom secara tidak sengaja oleh anak-anak -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kamera AR - Belajar Hardware</title>
+    
+    <!-- Memanggil Library A-Frame dan AR.js langsung dari CDN -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <!-- Memanggil file script logika AR (ar-handler.js) yang mendeteksi status marker -->
+    <script src="assets/js/ar-handler.js"></script>
+    
+    <style>
+        /* Menghilangkan scrollbar karena AR mengambil seluruh layar */
+        body { margin: 0; overflow: hidden; }
+        
+        /* Desain tombol kembali (Overlay di atas kamera) */
+        .ui-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 999; /* Memastikan tombol selalu berada paling atas */
+        }
+        
+        .btn-back {
+            background-color: #FF5A5F;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Desain kotak instruksi di bawah layar */
+        .instructions {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            z-index: 999;
+            pointer-events: none; /* Agar klik tembus ke bawah */
+        }
+
+        .instructions p {
+            background: rgba(255, 255, 255, 0.9);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #2B3674;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease; /* Transisi halus saat warna atau teks berubah */
+        }
+
+        /* Kontrol Zoom Khusus Desktop/Manual */
+        .zoom-controls {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .btn-zoom {
+            background-color: #4CC3D9;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Hilangkan efek tap di HP */
+        }
+
+        .btn-zoom:hover {
+            background-color: #2B3674;
+            transform: scale(1.1);
+        }
+
+        /* Responsive UI untuk Tablet dan HP */
+        @media (max-width: 768px) {
+            .zoom-controls {
+                right: 15px;
+                gap: 10px;
+            }
+            .btn-zoom {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Antarmuka UI (Tombol dan Instruksi) -->
+    <div class="ui-container">
+        <a href="index.html" class="btn-back">⬅ Kembali</a>
+    </div>
+
+    <div class="instructions">
+        <p>Arahkan kamera ke Marker untuk melihat 3D!</p>
+    </div>
+
+    <!-- Tombol Zoom (Terlihat di Desktop & Mobile) -->
+    <div class="zoom-controls">
+        <button id="btn-zoom-in" class="btn-zoom">+</button>
+        <button id="btn-zoom-out" class="btn-zoom">-</button>
+    </div>
+
+    <!-- Mulai Lingkungan 3D & AR -->
+    <a-scene 
+        embedded 
+        arjs="sourceType: webcam; sourceWidth: 1280; sourceHeight: 960; displayWidth: 1280; displayHeight: 960; videoTexture: true; debugUIEnabled: false;"
+        vr-mode-ui="enabled: false"> <!-- Menyembunyikan tombol kacamata VR bawaan -->
+
+        <!-- 1. Tempat Mendaftarkan Aset 3D -->
+        <a-assets timeout="100">
+            <a-asset-item id="model-1" src="assets/models/1cpu.glb"></a-asset-item>
+            <a-asset-item id="model-2" src="assets/models/2gpu.glb"></a-asset-item>
+            <a-asset-item id="model-3" src="assets/models/3mouse.glb"></a-asset-item>
+            <a-asset-item id="model-4" src="assets/models/4keyboard.glb"></a-asset-item>
+            <a-asset-item id="model-5" src="assets/models/5motherboard.glb"></a-asset-item>
+            <a-asset-item id="model-6" src="assets/models/6ram.glb"></a-asset-item>
+            <a-asset-item id="model-7" src="assets/models/7webcam.glb"></a-asset-item>
+            <a-asset-item id="model-8" src="assets/models/8monitor.glb"></a-asset-item>
+            <a-asset-item id="model-9" src="assets/models/9speaker.glb"></a-asset-item>
+            <a-asset-item id="model-10" src="assets/models/10ssd_kit.glb"></a-asset-item>
+        </a-assets>
+
+        <!-- 2. Pengaturan Marker -->
+        <!-- Marker 1: CPU -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-1.patt" marker-handler>
+            <a-entity gltf-model="#model-1" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Prosesor (CPU)" position="-0.8 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 2: GPU -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-2.patt" marker-handler>
+            <a-entity gltf-model="#model-2" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Kartu Grafis (GPU)" position="-1 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 3: Mouse -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-3.patt" marker-handler>
+            <a-entity gltf-model="#model-3" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Mouse" position="-0.5 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 4: Keyboard -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-4.patt" marker-handler>
+            <a-entity gltf-model="#model-4" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Keyboard" position="-0.6 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 5: Motherboard -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-5.patt" marker-handler>
+            <a-entity gltf-model="#model-5" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Motherboard" position="-0.8 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 6: RAM -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-6.patt" marker-handler>
+            <a-entity gltf-model="#model-6" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Memori (RAM)" position="-0.8 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 7: Webcam -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-7.patt" marker-handler>
+            <a-entity gltf-model="#model-7" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Webcam" position="-0.5 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 8: Monitor -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-8.patt" marker-handler>
+            <a-entity gltf-model="#model-8" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Monitor" position="-0.5 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 9: Speaker -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-9.patt" marker-handler>
+            <a-entity gltf-model="#model-9" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Speaker" position="-0.5 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- Marker 10: SSD -->
+        <a-marker type="pattern" url="assets/markers/patt/pattern-10.patt" marker-handler>
+            <a-entity gltf-model="#model-10" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+            <a-text value="Penyimpanan (SSD)" position="-1 1.5 0" color="#2B3674"></a-text>
+        </a-marker>
+
+        <!-- 3. Kamera Virtual pembaca AR -->
+        <a-entity camera></a-entity>
+
+    </a-scene>
+
+</body>
+</html>

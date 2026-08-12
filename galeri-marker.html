@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Marker - Belajar Hardware</title>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .gallery-header {
+            text-align: center;
+            padding: 30px 20px 20px;
+        }
+
+        .btn-print-all {
+            background: #FF5A5F;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 90, 95, 0.3);
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+
+        .btn-print-all:hover { transform: scale(1.05); }
+
+        .marker-image {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin: 15px 0;
+            border: 4px solid #2B3674;
+            border-radius: 12px;
+            background: white;
+            padding: 10px;
+        }
+
+        /* =========================================
+           PENGATURAN KHUSUS UNTUK MESIN PRINTER
+           ========================================= */
+        @media print {
+            /* Sembunyikan tombol dan background saat dicetak ke kertas */
+            body { background: white; }
+            .btn-back-katalog, .btn-print-all, .btn-download, .footer-section { display: none !important; }
+            
+            /* Atur ulang layout agar hemat kertas */
+            .menu-section { display: block; }
+            .menu-grid { display: block; text-align: center; }
+            .menu-card { 
+                display: inline-block; 
+                width: 45%; 
+                margin: 2%; 
+                box-shadow: none; 
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+        }
+
+        .btn-download {
+            display: inline-block;
+            background: #4CC3D9;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-download:hover { 
+            background: #2B3674; 
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Galeri -->
+    <header class="catalog-header" style="margin-bottom: 0;">
+        <a href="index.html" class="btn-back-katalog">⬅ Kembali</a>
+    </header>
+
+    <div class="gallery-header">
+        <h1 class="title-bounce" style="color: var(--text-dark);">Galeri Marker AR 🖨️</h1>
+        <p style="color: var(--text-light); margin-top: 10px;">
+            Cetak marker di bawah ini ke kertas, lalu gunakan halaman <b>Kamera AR</b> untuk memunculkan perangkat keras 3D!
+        </p>
+        <!-- Tombol untuk memicu dialog print browser -->
+        <button class="btn-print-all" onclick="window.print()">🖨️ Cetak Semua Marker</button>
+    </div>
+
+    <!-- Daftar Marker -->
+    <main class="menu-section">
+        <div class="container menu-grid">
+            
+            <!-- Marker 1: CPU -->
+            <div class="menu-card card-primary">
+                <h2>Marker CPU</h2>
+                <img src="assets/markers/images/pattern-1.png" alt="Marker CPU" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Prosesor.</p>
+                <a href="assets/markers/images/pattern-1.png" download="Marker_1_CPU.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 2: GPU -->
+            <div class="menu-card card-secondary">
+                <h2>Marker GPU</h2>
+                <img src="assets/markers/images/pattern-2.png" alt="Marker GPU" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Kartu Grafis.</p>
+                <a href="assets/markers/images/pattern-2.png" download="Marker_2_GPU.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 3: Mouse -->
+            <div class="menu-card card-tertiary">
+                <h2>Marker Mouse</h2>
+                <img src="assets/markers/images/pattern-3.png" alt="Marker Mouse" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Mouse.</p>
+                <a href="assets/markers/images/pattern-3.png" download="Marker_3_Mouse.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 4: Keyboard -->
+            <div class="menu-card card-primary">
+                <h2>Marker Keyboard</h2>
+                <img src="assets/markers/images/pattern-4.png" alt="Marker Keyboard" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Keyboard.</p>
+                <a href="assets/markers/images/pattern-4.png" download="Marker_4_Keyboard.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 5: Motherboard -->
+            <div class="menu-card card-secondary">
+                <h2>Marker Motherboard</h2>
+                <img src="assets/markers/images/pattern-5.png" alt="Marker Motherboard" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Motherboard.</p>
+                <a href="assets/markers/images/pattern-5.png" download="Marker_5_Motherboard.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 6: RAM -->
+            <div class="menu-card card-tertiary">
+                <h2>Marker RAM</h2>
+                <img src="assets/markers/images/pattern-6.png" alt="Marker RAM" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Memori (RAM).</p>
+                <a href="assets/markers/images/pattern-6.png" download="Marker_6_RAM.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 7: Webcam -->
+            <div class="menu-card card-primary">
+                <h2>Marker Webcam</h2>
+                <img src="assets/markers/images/pattern-7.png" alt="Marker Webcam" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Webcam.</p>
+                <a href="assets/markers/images/pattern-7.png" download="Marker_7_Webcam.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 8: Monitor -->
+            <div class="menu-card card-secondary">
+                <h2>Marker Monitor</h2>
+                <img src="assets/markers/images/pattern-8.png" alt="Marker Monitor" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Monitor.</p>
+                <a href="assets/markers/images/pattern-8.png" download="Marker_8_Monitor.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 9: Speaker -->
+            <div class="menu-card card-tertiary">
+                <h2>Marker Speaker</h2>
+                <img src="assets/markers/images/pattern-9.png" alt="Marker Speaker" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Speaker.</p>
+                <a href="assets/markers/images/pattern-9.png" download="Marker_9_Speaker.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+            <!-- Marker 10: SSD -->
+            <div class="menu-card card-primary">
+                <h2>Marker SSD</h2>
+                <img src="assets/markers/images/pattern-10.png" alt="Marker SSD" class="marker-image">
+                <p>Gunakan marker ini untuk melihat 3D Penyimpanan (SSD).</p>
+                <a href="assets/markers/images/pattern-10.png" download="Marker_10_SSD.png" class="btn-download">⬇️ Download</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer-section">
+        <p>Media Pembelajaran Interaktif &copy; 2026</p>
+    </footer>
+
+</body>
+</html>

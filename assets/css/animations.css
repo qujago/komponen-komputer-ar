@@ -1,0 +1,65 @@
+/* =========================================
+   ANIMASI JUDUL (POP & BOUNCE)
+   ========================================= */
+@keyframes popBounce {
+    0% { 
+        transform: scale(0.5); 
+        opacity: 0; 
+    }
+    50% { 
+        transform: scale(1.05); 
+        opacity: 1; 
+    }
+    70% { 
+        transform: scale(0.95); 
+    }
+    100% { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+}
+
+.title-bounce {
+    /* Animasi berjalan selama 0.8 detik saat halaman dimuat */
+    animation: popBounce 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+
+/* =========================================
+   ANIMASI KARTU MENU (FADE UP BERURUTAN)
+   ========================================= */
+@keyframes fadeInUp {
+    0% { 
+        transform: translateY(40px); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+}
+
+/* Memastikan kartu tersembunyi sebelum animasi dimulai */
+.menu-card {
+    opacity: 0; 
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Mengatur jeda (delay) agar kartu muncul satu per satu secara berurutan */
+.menu-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.menu-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.menu-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* 
+   Catatan: 
+   Efek hover pada kartu (terangkat ke atas) sudah diatur di style.css.
+   Animasi di sini hanya untuk efek saat halaman pertama kali dibuka.
+*/

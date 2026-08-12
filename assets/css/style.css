@@ -1,0 +1,131 @@
+/* =========================================
+   VARIABEL WARNA & PENGATURAN DASAR
+   ========================================= */
+:root {
+    --bg-main: #F4F7FE;       /* Warna latar belakang biru sangat muda */
+    --text-dark: #2B3674;     /* Warna teks utama (biru dongker gelap) */
+    --text-light: #68769F;    /* Warna teks sekunder */
+    
+    /* Warna untuk kartu menu */
+    --card-blue: #E2EAFB;
+    --card-yellow: #FFF4D2;
+    --card-green: #E4F8ED;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   HEADER / HERO SECTION
+   ========================================= */
+.hero-section {
+    text-align: center;
+    padding: 40px 0 30px;
+}
+
+.hero-section h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.hero-section .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+/* =========================================
+   GRID KARTU MENU
+   ========================================= */
+.menu-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Desain Dasar Kartu */
+.menu-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 25px;
+    border-radius: 24px; /* Sudut melengkung agar ramah anak */
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+}
+
+.menu-card h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 15px 0 10px;
+}
+
+.menu-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.card-icon {
+    font-size: 4rem;
+}
+
+/* Efek saat kartu disentuh/di-hover */
+.menu-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+/* Pewarnaan Spesifik Tiap Kartu */
+.card-primary { background-color: var(--card-blue); }
+.card-secondary { background-color: var(--card-yellow); }
+.card-tertiary { background-color: var(--card-green); }
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer-section {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (UNTUK HP)
+   ========================================= */
+@media (max-width: 600px) {
+    .hero-section h1 { font-size: 1.8rem; }
+    .hero-section { padding: 30px 0 20px; }
+    .menu-card { padding: 30px 20px; }
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog 3D Hardware</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Memanggil library model-viewer dari Google -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+    <style>
+        /* Desain Khusus Halaman Katalog */
+        .catalog-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 5%;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .btn-back-katalog {
+            background: var(--card-blue);
+            color: var(--text-dark);
+            padding: 10px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-back-katalog:hover {
+            background: #d0def9;
+        }
+
+        /* Desain Tombol Lihat 3D */
+        .btn-3d {
+            background: #2B3674;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: 'Poppins', sans-serif;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-3d:hover {
+            background: #4CC3D9;
+            transform: scale(1.05);
+        }
+
+        /* =========================================
+           DESAIN MODAL (POP-UP 3D VIEWER)
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            /* Sembunyikan secara default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 24px;
+            padding: 20px;
+            position: relative;
+            text-align: center;
+            animation: popBounce 0.5s ease-out;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #FF5A5F;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Area penampil 3D */
+        model-viewer {
+            width: 100%;
+            height: 50vh;
+            /* Mengambil 50% tinggi layar */
+            background-color: #F4F7FE;
+            border-radius: 16px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Katalog -->
+    <header class="catalog-header">
+        <a href="index.html" class="btn-back-katalog">⬅ Kembali</a>
+        <h2 style="margin: 0; color: var(--text-dark);">Katalog Hardware</h2>
+    </header>
+
+    <!-- Daftar Komponen Hardware -->
+    <main class="menu-section">
+        <div class="container menu-grid">
+
+            <!-- Item 1: CPU -->
+            <div class="menu-card card-primary">
+                <div class="card-icon">🧠</div>
+                <h2>Prosesor (CPU)</h2>
+                <p>Otak dari komputer yang memproses semua perintah.</p>
+                <button class="btn-3d" data-src="assets/models/1cpu.glb" data-title="Prosesor (CPU)">Tampilkan
+                    3D</button>
+            </div>
+
+            <!-- Item 2: GPU -->
+            <div class="menu-card card-secondary">
+                <div class="card-icon">🎮</div>
+                <h2>Kartu Grafis (GPU)</h2>
+                <p>Komponen yang memproses tampilan grafis dan visual.</p>
+                <button class="btn-3d" data-src="assets/models/2gpu.glb" data-title="Kartu Grafis (GPU)">Tampilkan
+                    3D</button>
+            </div>
+
+            <!-- Item 3: Mouse -->
+            <div class="menu-card card-tertiary">
+                <div class="card-icon">🖱️</div>
+                <h2>Mouse</h2>
+                <p>Perangkat input untuk menggerakkan kursor di layar.</p>
+                <button class="btn-3d" data-src="assets/models/3mouse.glb" data-title="Mouse">Tampilkan 3D</button>
+            </div>
+
+            <!-- Item 4: Keyboard -->
+            <div class="menu-card card-primary">
+                <div class="card-icon">⌨️</div>
+                <h2>Keyboard</h2>
+                <p>Perangkat input untuk mengetik teks dan perintah.</p>
+                <button class="btn-3d" data-src="assets/models/4keyboard.glb" data-title="Keyboard">Tampilkan
+                    3D</button>
+            </div>
+
+            <!-- Item 5: Motherboard -->
+            <div class="menu-card card-secondary">
+                <div class="card-icon">🗺️</div>
+                <h2>Motherboard</h2>
+                <p>Papan utama tempat semua perangkat keras terhubung.</p>
+                <button class="btn-3d" data-src="assets/models/5motherboard.glb" data-title="Motherboard">Tampilkan
+                    3D</button>
+            </div>
+
+            <!-- Item 6: RAM -->
+            <div class="menu-card card-tertiary">
+                <div class="card-icon">⚡</div>
+                <h2>Memori (RAM)</h2>
+                <p>Penyimpanan sementara yang membuat komputer bekerja cepat.</p>
+                <button class="btn-3d" data-src="assets/models/6ram.glb" data-title="Memori (RAM)">Tampilkan 3D</button>
+            </div>
+
+            <!-- Item 7: Webcam -->
+            <div class="menu-card card-primary">
+                <div class="card-icon">📷</div>
+                <h2>Webcam</h2>
+                <p>Kamera digital yang terhubung ke komputer untuk video.</p>
+                <button class="btn-3d" data-src="assets/models/7webcam.glb" data-title="Webcam">Tampilkan 3D</button>
+            </div>
+
+            <!-- Item 8: Monitor -->
+            <div class="menu-card card-secondary">
+                <div class="card-icon">🖥️</div>
+                <h2>Monitor</h2>
+                <p>Layar tampilan untuk melihat visual grafis dari komputer.</p>
+                <button class="btn-3d" data-src="assets/models/8monitor.glb" data-title="Monitor">Tampilkan 3D</button>
+            </div>
+
+            <!-- Item 9: Speaker -->
+            <div class="menu-card card-tertiary">
+                <div class="card-icon">🔊</div>
+                <h2>Speaker</h2>
+                <p>Perangkat output untuk menghasilkan suara dari komputer.</p>
+                <button class="btn-3d" data-src="assets/models/9speaker.glb" data-title="Speaker">Tampilkan 3D</button>
+            </div>
+
+            <!-- Item 10: SSD -->
+            <div class="menu-card card-primary">
+                <div class="card-icon">💽</div>
+                <h2>Penyimpanan (SSD)</h2>
+                <p>Media penyimpanan data permanen dengan kecepatan tinggi.</p>
+                <button class="btn-3d" data-src="assets/models/10ssd_kit.glb" data-title="Penyimpanan (SSD)">Tampilkan
+                    3D</button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal Pop-up untuk menampilkan 3D -->
+    <div class="modal-overlay" id="modal3d">
+        <div class="modal-content">
+            <button class="btn-close" id="closeModal">X</button>
+            <h2 id="modalTitle">Nama Hardware</h2>
+
+            <!-- Google Model Viewer (Otomatis berputar, bisa di-zoom & digeser) -->
+            <model-viewer id="viewerModel" src="" alt="Model 3D Perangkat Keras" camera-controls auto-rotate
+                shadow-intensity="1">
+            </model-viewer>
+
+            <p style="margin-top: 15px; color: var(--text-light); font-size: 0.9rem;">
+                Geser untuk memutar • Cubit untuk zoom
+            </p>
+        </div>
+    </div>
+
+    <!-- Script Logika 3D Viewer -->
+    <script src="assets/js/3d-viewer.js"></script>
+</body>
+
+</html>

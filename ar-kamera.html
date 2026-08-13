@@ -131,13 +131,69 @@
                 font-size: 22px;
             }
         }
+        /* =========================================
+           LOADING SCREEN
+           ========================================= */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top: 6px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loading-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- LAYAR LOADING (Akan hilang otomatis saat 3D selesai didownload) -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <div id="loading-text">Mempersiapkan 3D & Kamera (Mohon Tunggu)...</div>
+    </div>
+
     <!-- Antarmuka UI (Tombol dan Instruksi) -->
     <div class="ui-container">
-        <a href="index.html" class="btn-back"><i class="ph ph-arrow-left"></i> Kembali</a>
+        <a href="index.html" class="btn-back" style="margin-bottom: 15px;"><i class="ph ph-arrow-left"></i> Kembali</a>
+        <br>
+        <button id="btn-mirror" class="btn-back" style="background: rgba(59, 130, 246, 0.9); color: white; border: none; padding: 10px 15px; display: inline-flex; cursor: pointer;">
+            <i class="ph ph-arrows-left-right"></i> Flip Kamera
+        </button>
     </div>
 
     <div class="instructions">
@@ -151,13 +207,15 @@
     </div>
 
     <!-- Mulai Lingkungan 3D & AR -->
+    <!-- Menghapus resolusi hardcode agar kamera menyesuaikan rasio asli HP (mencegah crop) -->
     <a-scene 
         embedded 
-        arjs="sourceType: webcam; sourceWidth: 1280; sourceHeight: 960; displayWidth: 1280; displayHeight: 960; videoTexture: true; debugUIEnabled: false;"
+        arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best; videoTexture: true;"
+        renderer="logarithmicDepthBuffer: true; antialias: true; alpha: true;"
         vr-mode-ui="enabled: false"> <!-- Menyembunyikan tombol kacamata VR bawaan -->
 
         <!-- 1. Tempat Mendaftarkan Aset 3D -->
-        <a-assets timeout="100">
+        <a-assets>
             <a-asset-item id="model-1" src="assets/models/1cpu.glb"></a-asset-item>
             <a-asset-item id="model-2" src="assets/models/2gpu.glb"></a-asset-item>
             <a-asset-item id="model-3" src="assets/models/3mouse.glb"></a-asset-item>
@@ -236,5 +294,40 @@
 
     </a-scene>
 
+    <!-- Script Menghilangkan Loading Screen & Fitur Mirror -->
+    <script>
+        // Logika Loading Screen
+        document.querySelector('a-scene').addEventListener('loaded', function () {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.visibility = 'hidden';
+                }, 500); 
+            }, 500);
+        });
+
+        // Logika Tombol Flip (Mirror) Kamera
+        const btnMirror = document.getElementById('btn-mirror');
+        let isMirrored = false;
+
+        btnMirror.addEventListener('click', () => {
+            isMirrored = !isMirrored;
+            const video = document.querySelector('video');
+            const canvas = document.querySelector('.a-canvas');
+            
+            if (video && canvas) {
+                if (isMirrored) {
+                    video.style.transform = 'scaleX(-1)';
+                    canvas.style.transform = 'scaleX(-1)';
+                    btnMirror.style.background = '#10B981'; // Hijau tanda aktif
+                } else {
+                    video.style.transform = 'scaleX(1)';
+                    canvas.style.transform = 'scaleX(1)';
+                    btnMirror.style.background = 'rgba(59, 130, 246, 0.9)'; // Kembali biru
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -84,6 +84,121 @@
             background: #2B3674; 
             transform: scale(1.05);
         }
+        /* =========================================
+           LIGHTBOX GALERI (MODAL)
+           ========================================= */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 4px solid white;
+            background: white;
+            padding: 10px;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .lightbox-title {
+            color: white;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Navigasi Lightbox */
+        .btn-lightbox {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            z-index: 2001;
+        }
+
+        .btn-lightbox:hover {
+            background: var(--accent);
+        }
+
+        .btn-prev { left: 5%; }
+        .btn-next { right: 5%; }
+        
+        .btn-close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #EF4444;
+            border: 2px solid white;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            z-index: 2002;
+        }
+        
+        .btn-close-lightbox:hover { 
+            background: #DC2626; 
+            transform: scale(1.1); 
+        }
+
+        .lightbox-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .btn-prev { left: 10px; }
+            .btn-next { right: 10px; }
+            .btn-close-lightbox { right: 10px; top: 10px; }
+            .lightbox-img { max-height: 45vh; }
+            .lightbox-title { font-size: 1.2rem; margin-top: 15px; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -199,5 +314,121 @@
         <p>Media Pembelajaran Interaktif &copy; 2026</p>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="btn-close-lightbox" id="closeLightbox"><i class="ph ph-x"></i></button>
+        <button class="btn-lightbox btn-prev" id="prevLightbox"><i class="ph ph-caret-left"></i></button>
+        
+        <div class="lightbox-content">
+            <img src="" alt="Marker Preview" class="lightbox-img" id="lightboxImg">
+            <h2 class="lightbox-title" id="lightboxTitle">Marker Title</h2>
+            <div class="lightbox-actions">
+                <a href="#" download class="btn-download" id="lightboxDownload" style="font-size: 1rem; padding: 12px 25px;">
+                    <i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download Marker
+                </a>
+            </div>
+            <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-top: 15px;">Geser untuk melihat marker lain</p>
+        </div>
+        
+        <button class="btn-lightbox btn-next" id="nextLightbox"><i class="ph ph-caret-right"></i></button>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.menu-card');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDownload = document.getElementById('lightboxDownload');
+        
+        let currentIndex = 0;
+        let markersData = [];
+
+        // Kumpulkan data marker dari DOM
+        cards.forEach((card, index) => {
+            const img = card.querySelector('.marker-image');
+            const title = card.querySelector('h2').innerText;
+            const downloadBtn = card.querySelector('.btn-download');
+            
+            // Berikan pointer cursor untuk menandakan bisa diklik
+            img.style.cursor = 'pointer';
+            
+            markersData.push({
+                src: img.src,
+                title: title,
+                downloadHref: downloadBtn.href,
+                downloadName: downloadBtn.getAttribute('download')
+            });
+
+            // Klik gambar untuk buka lightbox
+            img.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+        }
+
+        function updateLightbox() {
+            const data = markersData[currentIndex];
+            lightboxImg.src = data.src;
+            lightboxTitle.innerText = data.title;
+            lightboxDownload.href = data.downloadHref;
+            lightboxDownload.setAttribute('download', data.downloadName);
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % markersData.length;
+            updateLightbox();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + markersData.length) % markersData.length;
+            updateLightbox();
+        }
+
+        // Event Listeners Navigasi
+        document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
+        document.getElementById('nextLightbox').addEventListener('click', nextImage);
+        document.getElementById('prevLightbox').addEventListener('click', prevImage);
+
+        // Tutup jika klik area kosong (di luar konten lightbox)
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Dukungan Keyboard (Panah Kiri/Kanan & ESC)
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        // Dukungan Swipe untuk Mobile (Touch Events)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        lightbox.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        lightbox.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextImage(); // Swipe Kiri (Next)
+            if (touchEndX > touchStartX + 50) prevImage(); // Swipe Kanan (Prev)
+        }
+    </script>
 </body>
 </html>

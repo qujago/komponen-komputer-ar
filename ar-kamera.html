@@ -13,27 +13,41 @@
     <!-- Memanggil file script logika AR (ar-handler.js) yang mendeteksi status marker -->
     <script src="assets/js/ar-handler.js"></script>
     
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
     <style>
         /* Menghilangkan scrollbar karena AR mengambil seluruh layar */
-        body { margin: 0; overflow: hidden; }
+        body { margin: 0; overflow: hidden; font-family: 'Poppins', sans-serif; }
         
         /* Desain tombol kembali (Overlay di atas kamera) */
         .ui-container {
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 999; /* Memastikan tombol selalu berada paling atas */
+            z-index: 999;
         }
         
         .btn-back {
-            background-color: #FF5A5F;
-            color: white;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #1E293B;
             padding: 10px 20px;
             text-decoration: none;
-            font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
         }
 
         /* Desain kotak instruksi di bawah layar */
@@ -43,19 +57,21 @@
             width: 100%;
             text-align: center;
             z-index: 999;
-            pointer-events: none; /* Agar klik tembus ke bawah */
+            pointer-events: none;
         }
 
         .instructions p {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             display: inline-block;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-family: 'Poppins', sans-serif;
+            padding: 12px 24px;
+            border-radius: 30px;
             font-weight: 600;
-            color: #2B3674;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease; /* Transisi halus saat warna atau teks berubah */
+            color: #1E293B;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         /* Kontrol Zoom Khusus Desktop/Manual */
@@ -71,26 +87,30 @@
         }
 
         .btn-zoom {
-            background-color: #4CC3D9;
-            color: white;
-            border: none;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #1E293B;
             width: 50px;
             height: 50px;
             border-radius: 50%;
             font-size: 24px;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Poppins', sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Hilangkan efek tap di HP */
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-zoom:hover {
-            background-color: #2B3674;
+            background: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
             transform: scale(1.1);
         }
 
@@ -103,7 +123,7 @@
             .btn-zoom {
                 width: 45px;
                 height: 45px;
-                font-size: 20px;
+                font-size: 22px;
             }
         }
     </style>
@@ -112,7 +132,7 @@
 
     <!-- Antarmuka UI (Tombol dan Instruksi) -->
     <div class="ui-container">
-        <a href="index.html" class="btn-back">⬅ Kembali</a>
+        <a href="index.html" class="btn-back"><i class="ph ph-arrow-left"></i> Kembali</a>
     </div>
 
     <div class="instructions">

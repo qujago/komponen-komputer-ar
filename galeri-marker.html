@@ -7,7 +7,10 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/animations.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     
     <style>
         .gallery-header {
@@ -91,12 +94,16 @@
     </header>
 
     <div class="gallery-header">
-        <h1 class="title-bounce" style="color: var(--text-dark);">Galeri Marker AR 🖨️</h1>
+        <h1 class="title-bounce" style="color: var(--text-dark); display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <i class="ph ph-images" style="color: var(--accent);"></i> Galeri Marker AR
+        </h1>
         <p style="color: var(--text-light); margin-top: 10px;">
-            Cetak marker di bawah ini ke kertas, lalu gunakan halaman <b>Kamera AR</b> untuk memunculkan perangkat keras 3D!
+            Cetak marker di bawah ini ke kertas, lalu gunakan halaman <b>Kamera AR</b> untuk memunculkan perangkat keras 3D.
         </p>
         <!-- Tombol untuk memicu dialog print browser -->
-        <button class="btn-print-all" onclick="window.print()">🖨️ Cetak Semua Marker</button>
+        <button class="btn-print-all" onclick="window.print()">
+            <i class="ph ph-printer" style="margin-right: 5px;"></i> Cetak Semua Marker
+        </button>
     </div>
 
     <!-- Daftar Marker -->
@@ -108,7 +115,7 @@
                 <h2>Marker CPU</h2>
                 <img src="assets/markers/images/pattern-1.png" alt="Marker CPU" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Prosesor.</p>
-                <a href="assets/markers/images/pattern-1.png" download="Marker_1_CPU.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-1.png" download="Marker_1_CPU.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 2: GPU -->
@@ -116,7 +123,7 @@
                 <h2>Marker GPU</h2>
                 <img src="assets/markers/images/pattern-2.png" alt="Marker GPU" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Kartu Grafis.</p>
-                <a href="assets/markers/images/pattern-2.png" download="Marker_2_GPU.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-2.png" download="Marker_2_GPU.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 3: Mouse -->
@@ -124,7 +131,7 @@
                 <h2>Marker Mouse</h2>
                 <img src="assets/markers/images/pattern-3.png" alt="Marker Mouse" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Mouse.</p>
-                <a href="assets/markers/images/pattern-3.png" download="Marker_3_Mouse.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-3.png" download="Marker_3_Mouse.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 4: Keyboard -->
@@ -132,7 +139,7 @@
                 <h2>Marker Keyboard</h2>
                 <img src="assets/markers/images/pattern-4.png" alt="Marker Keyboard" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Keyboard.</p>
-                <a href="assets/markers/images/pattern-4.png" download="Marker_4_Keyboard.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-4.png" download="Marker_4_Keyboard.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 5: Motherboard -->
@@ -140,7 +147,7 @@
                 <h2>Marker Motherboard</h2>
                 <img src="assets/markers/images/pattern-5.png" alt="Marker Motherboard" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Motherboard.</p>
-                <a href="assets/markers/images/pattern-5.png" download="Marker_5_Motherboard.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-5.png" download="Marker_5_Motherboard.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 6: RAM -->
@@ -148,7 +155,7 @@
                 <h2>Marker RAM</h2>
                 <img src="assets/markers/images/pattern-6.png" alt="Marker RAM" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Memori (RAM).</p>
-                <a href="assets/markers/images/pattern-6.png" download="Marker_6_RAM.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-6.png" download="Marker_6_RAM.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 7: Webcam -->
@@ -156,7 +163,7 @@
                 <h2>Marker Webcam</h2>
                 <img src="assets/markers/images/pattern-7.png" alt="Marker Webcam" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Webcam.</p>
-                <a href="assets/markers/images/pattern-7.png" download="Marker_7_Webcam.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-7.png" download="Marker_7_Webcam.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 8: Monitor -->
@@ -164,7 +171,7 @@
                 <h2>Marker Monitor</h2>
                 <img src="assets/markers/images/pattern-8.png" alt="Marker Monitor" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Monitor.</p>
-                <a href="assets/markers/images/pattern-8.png" download="Marker_8_Monitor.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-8.png" download="Marker_8_Monitor.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 9: Speaker -->
@@ -172,7 +179,7 @@
                 <h2>Marker Speaker</h2>
                 <img src="assets/markers/images/pattern-9.png" alt="Marker Speaker" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Speaker.</p>
-                <a href="assets/markers/images/pattern-9.png" download="Marker_9_Speaker.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-9.png" download="Marker_9_Speaker.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
             <!-- Marker 10: SSD -->
@@ -180,7 +187,7 @@
                 <h2>Marker SSD</h2>
                 <img src="assets/markers/images/pattern-10.png" alt="Marker SSD" class="marker-image">
                 <p>Gunakan marker ini untuk melihat 3D Penyimpanan (SSD).</p>
-                <a href="assets/markers/images/pattern-10.png" download="Marker_10_SSD.png" class="btn-download">⬇️ Download</a>
+                <a href="assets/markers/images/pattern-10.png" download="Marker_10_SSD.png" class="btn-download"><i class="ph ph-download-simple" style="margin-right: 5px;"></i> Download</a>
             </div>
 
         </div>

@@ -2,14 +2,15 @@
    VARIABEL WARNA & PENGATURAN DASAR
    ========================================= */
 :root {
-    --bg-main: #F4F7FE;       /* Warna latar belakang biru sangat muda */
-    --text-dark: #2B3674;     /* Warna teks utama (biru dongker gelap) */
-    --text-light: #68769F;    /* Warna teks sekunder */
+    --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    --text-dark: #1E293B;
+    --text-light: #64748B;
+    --accent: #3B82F6;
     
-    /* Warna untuk kartu menu */
-    --card-blue: #E2EAFB;
-    --card-yellow: #FFF4D2;
-    --card-green: #E4F8ED;
+    /* Variabel Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
 }
 
 * {
@@ -20,11 +21,12 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-main);
+    background: var(--bg-gradient);
     color: var(--text-dark);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-attachment: fixed;
 }
 
 .container {
@@ -38,18 +40,19 @@ body {
    ========================================= */
 .hero-section {
     text-align: center;
-    padding: 40px 0 30px;
+    padding: 50px 0 40px;
 }
 
 .hero-section h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: var(--text-dark);
+    letter-spacing: -0.5px;
 }
 
 .hero-section .subtitle {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-light);
     font-weight: 400;
 }
@@ -61,62 +64,84 @@ body {
     flex: 1;
     display: flex;
     align-items: center;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
 }
 
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
-/* Desain Dasar Kartu */
+/* Desain Dasar Kartu (Glassmorphism) */
 .menu-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 40px 25px;
-    border-radius: 24px; /* Sudut melengkung agar ramah anak */
+    padding: 40px 30px;
+    border-radius: 24px;
     text-decoration: none;
     color: var(--text-dark);
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Glass Effect */
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
 }
 
 .menu-card h2 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 600;
-    margin: 15px 0 10px;
+    margin: 20px 0 12px;
+    letter-spacing: -0.3px;
 }
 
 .menu-card p {
     font-size: 0.95rem;
     color: var(--text-light);
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
+/* Penyesuaian Ikon Kartu */
 .card-icon {
-    font-size: 4rem;
+    font-size: 4rem; /* Untuk emoji di katalog */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Jika Ikon menggunakan font (Phosphor Icons) */
+i.card-icon {
+    font-size: 4.5rem;
 }
 
 /* Efek saat kartu disentuh/di-hover */
 .menu-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(31, 38, 135, 0.1);
+    background: rgba(255, 255, 255, 0.9);
 }
 
-/* Pewarnaan Spesifik Tiap Kartu */
-.card-primary { background-color: var(--card-blue); }
-.card-secondary { background-color: var(--card-yellow); }
-.card-tertiary { background-color: var(--card-green); }
+/* Pewarnaan Spesifik Ikon Vektor */
+.card-primary i.card-icon { color: #3B82F6; } /* Biru Elegan */
+.card-secondary i.card-icon { color: #8B5CF6; } /* Ungu Elegan */
+.card-tertiary i.card-icon { color: #10B981; } /* Hijau Elegan */
+
+/* Pewarnaan Box Spesifik (Khusus Katalog 3D untuk tetap mempertahankan warna) */
+.card-primary { background: var(--glass-bg); }
+.card-secondary { background: var(--glass-bg); }
+.card-tertiary { background: var(--glass-bg); }
 
 /* =========================================
    FOOTER
    ========================================= */
 .footer-section {
     text-align: center;
-    padding: 20px 0;
+    padding: 25px 0;
     font-size: 0.85rem;
     color: var(--text-light);
 }
@@ -125,7 +150,7 @@ body {
    RESPONSIVE DESIGN (UNTUK HP)
    ========================================= */
 @media (max-width: 600px) {
-    .hero-section h1 { font-size: 1.8rem; }
-    .hero-section { padding: 30px 0 20px; }
-    .menu-card { padding: 30px 20px; }
+    .hero-section h1 { font-size: 1.9rem; }
+    .hero-section { padding: 40px 0 25px; }
+    .menu-card { padding: 35px 25px; }
 }

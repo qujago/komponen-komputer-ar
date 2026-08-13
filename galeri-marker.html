@@ -89,15 +89,17 @@
 <body>
 
     <!-- Header Galeri -->
-    <header class="catalog-header" style="margin-bottom: 0;">
-        <a href="index.html" class="btn-back-katalog">⬅ Kembali</a>
-    </header>
-
-    <div class="gallery-header">
-        <h1 class="title-bounce" style="color: var(--text-dark); display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <header style="display: flex; align-items: center; justify-content: center; padding: 25px 5%; margin-bottom: 10px; position: relative;">
+        <a href="index.html" class="btn-back-global" style="position: absolute; left: 5%;">
+            <i class="ph ph-arrow-left"></i> Kembali
+        </a>
+        <h1 class="title-bounce" style="margin: 0; font-size: 1.8rem; color: var(--text-dark); display: flex; align-items: center; gap: 10px;">
             <i class="ph ph-images" style="color: var(--accent);"></i> Galeri Marker AR
         </h1>
-        <p style="color: var(--text-light); margin-top: 10px;">
+    </header>
+
+    <div class="gallery-header" style="padding-top: 0;">
+        <p style="color: var(--text-light);">
             Cetak marker di bawah ini ke kertas, lalu gunakan halaman <b>Kamera AR</b> untuk memunculkan perangkat keras 3D.
         </p>
         <!-- Tombol untuk memicu dialog print browser -->

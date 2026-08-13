@@ -12,31 +12,24 @@
 
     <!-- Memanggil library model-viewer dari Google -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
         /* Desain Khusus Halaman Katalog */
         .catalog-header {
             display: flex;
             align-items: center;
-            padding: 20px 5%;
-            background: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            justify-content: center; /* Memusatkan tulisan */
+            padding: 25px 5%;
             margin-bottom: 30px;
+            position: relative;
         }
 
-        .btn-back-katalog {
-            background: var(--card-blue);
-            color: var(--text-dark);
-            padding: 10px 20px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-right: 20px;
-            transition: 0.3s;
-        }
-
-        .btn-back-katalog:hover {
-            background: #d0def9;
+        .catalog-header .btn-back-global {
+            position: absolute;
+            left: 5%;
         }
 
         /* Desain Tombol Lihat 3D */
@@ -55,7 +48,7 @@
         }
 
         .btn-3d:hover {
-            background: #4CC3D9;
+            background: #3B82F6;
             transform: scale(1.05);
         }
 
@@ -68,50 +61,69 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(15, 23, 42, 0.8);
             display: none;
-            /* Sembunyikan secara default */
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .modal-content {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             width: 90%;
             max-width: 800px;
-            border-radius: 24px;
-            padding: 20px;
+            border-radius: 30px;
+            padding: 25px;
             position: relative;
             text-align: center;
-            animation: popBounce 0.5s ease-out;
+            animation: popBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .btn-close {
             position: absolute;
             top: -15px;
             right: -15px;
-            background: #FF5A5F;
+            background: #EF4444;
             color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
+            border: 2px solid white;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+        
+        .btn-close:hover {
+            transform: scale(1.1);
+            background: #DC2626;
         }
 
         /* Area penampil 3D */
         model-viewer {
             width: 100%;
             height: 50vh;
-            /* Mengambil 50% tinggi layar */
-            background-color: #F4F7FE;
-            border-radius: 16px;
+            background-color: transparent;
+            border-radius: 20px;
             margin-top: 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .catalog-header {
+                flex-direction: column;
+                gap: 15px;
+                padding-top: 30px;
+            }
+            .catalog-header .btn-back-global {
+                position: relative;
+                left: 0;
+            }
         }
     </style>
 </head>
@@ -120,8 +132,8 @@
 
     <!-- Header Katalog -->
     <header class="catalog-header">
-        <a href="index.html" class="btn-back-katalog">⬅ Kembali</a>
-        <h2 style="margin: 0; color: var(--text-dark);">Katalog Hardware</h2>
+        <a href="index.html" class="btn-back-global"><i class="ph ph-arrow-left"></i> Kembali</a>
+        <h2 style="margin: 0; color: var(--text-dark); font-size: 1.8rem;">Katalog Hardware</h2>
     </header>
 
     <!-- Daftar Komponen Hardware -->

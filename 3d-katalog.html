@@ -71,7 +71,8 @@
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
             width: 90%;
             max-width: 800px;
@@ -81,6 +82,10 @@
             text-align: center;
             animation: popBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 {
+            color: var(--text-dark);
         }
 
         .btn-close {
@@ -113,6 +118,38 @@
             border-radius: 20px;
             margin-top: 15px;
         }
+
+        /* Background Switcher */
+        .bg-switcher {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .bg-switcher p {
+            margin: 0 !important;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .bg-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .bg-btn:hover {
+            transform: scale(1.1);
+        }
+        /* Checkerboard pattern for transparent */
+        .bg-transparan { background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 10px 10px; background-position: 0 0, 0 5px, 5px -5px, -5px 0px; background-color: white; }
+        .bg-putih { background-color: #ffffff; }
+        .bg-hitam { background-color: #1e293b; border-color: rgba(255,255,255,0.2); }
+        .bg-biru { background-color: #e0c3fc; }
         
         @media (max-width: 600px) {
             .catalog-header {
@@ -249,6 +286,14 @@
                 shadow-intensity="1">
             </model-viewer>
 
+            <div class="bg-switcher">
+                <p>Background:</p>
+                <button class="bg-btn bg-transparan" data-bg="transparent" title="Transparan"></button>
+                <button class="bg-btn bg-putih" data-bg="#ffffff" title="Putih"></button>
+                <button class="bg-btn bg-hitam" data-bg="#1e293b" title="Gelap"></button>
+                <button class="bg-btn bg-biru" data-bg="#e0c3fc" title="Biru"></button>
+            </div>
+
             <p style="margin-top: 15px; color: var(--text-light); font-size: 0.9rem;">
                 Geser untuk memutar • Cubit untuk zoom
             </p>
@@ -257,6 +302,8 @@
 
     <!-- Script Logika 3D Viewer -->
     <script src="assets/js/3d-viewer.js"></script>
+    <!-- Menghubungkan ke script dark mode -->
+    <script src="assets/js/theme-toggle.js"></script>
 </body>
 
 </html>

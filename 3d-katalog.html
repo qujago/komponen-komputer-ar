@@ -71,7 +71,8 @@
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
             width: 90%;
             max-width: 800px;
@@ -81,6 +82,10 @@
             text-align: center;
             animation: popBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 {
+            color: var(--text-dark);
         }
 
         .btn-close {
@@ -113,6 +118,38 @@
             border-radius: 20px;
             margin-top: 15px;
         }
+
+        /* Background Switcher */
+        .bg-switcher {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .bg-switcher p {
+            margin: 0 !important;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .bg-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .bg-btn:hover {
+            transform: scale(1.1);
+        }
+        /* Checkerboard pattern for transparent */
+        .bg-transparan { background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 10px 10px; background-position: 0 0, 0 5px, 5px -5px, -5px 0px; background-color: white; }
+        .bg-putih { background-color: #ffffff; }
+        .bg-hitam { background-color: #1e293b; border-color: rgba(255,255,255,0.2); }
+        .bg-biru { background-color: #e0c3fc; }
         
         @media (max-width: 600px) {
             .catalog-header {
@@ -152,7 +189,7 @@
 
             <!-- Item 1: CPU -->
             <div class="menu-card card-primary">
-                <div class="card-icon">🧠</div>
+                <img src="assets/images/1cpu.png" class="card-icon" alt="CPU">
                 <h2>Prosesor (CPU)</h2>
                 <p>Otak dari komputer yang memproses semua perintah.</p>
                 <button class="btn-3d" data-src="assets/models/1cpu.glb" data-title="Prosesor (CPU)">Tampilkan
@@ -161,7 +198,7 @@
 
             <!-- Item 2: GPU -->
             <div class="menu-card card-secondary">
-                <div class="card-icon">🎮</div>
+                <img src="assets/images/2gpu.png" class="card-icon" alt="GPU">
                 <h2>Kartu Grafis (GPU)</h2>
                 <p>Komponen yang memproses tampilan grafis dan visual.</p>
                 <button class="btn-3d" data-src="assets/models/2gpu.glb" data-title="Kartu Grafis (GPU)">Tampilkan
@@ -170,7 +207,7 @@
 
             <!-- Item 3: Mouse -->
             <div class="menu-card card-tertiary">
-                <div class="card-icon">🖱️</div>
+                <img src="assets/images/3mouse.png" class="card-icon" alt="Mouse">
                 <h2>Mouse</h2>
                 <p>Perangkat input untuk menggerakkan kursor di layar.</p>
                 <button class="btn-3d" data-src="assets/models/3mouse.glb" data-title="Mouse">Tampilkan 3D</button>
@@ -178,7 +215,7 @@
 
             <!-- Item 4: Keyboard -->
             <div class="menu-card card-primary">
-                <div class="card-icon">⌨️</div>
+                <img src="assets/images/4keyboard.png" class="card-icon" alt="Keyboard">
                 <h2>Keyboard</h2>
                 <p>Perangkat input untuk mengetik teks dan perintah.</p>
                 <button class="btn-3d" data-src="assets/models/4keyboard.glb" data-title="Keyboard">Tampilkan
@@ -187,7 +224,7 @@
 
             <!-- Item 5: Motherboard -->
             <div class="menu-card card-secondary">
-                <div class="card-icon">🗺️</div>
+                <img src="assets/images/5motherboard.png" class="card-icon" alt="Motherboard">
                 <h2>Motherboard</h2>
                 <p>Papan utama tempat semua perangkat keras terhubung.</p>
                 <button class="btn-3d" data-src="assets/models/5motherboard.glb" data-title="Motherboard">Tampilkan
@@ -196,7 +233,7 @@
 
             <!-- Item 6: RAM -->
             <div class="menu-card card-tertiary">
-                <div class="card-icon">⚡</div>
+                <img src="assets/images/6ram.png" class="card-icon" alt="RAM">
                 <h2>Memori (RAM)</h2>
                 <p>Penyimpanan sementara yang membuat komputer bekerja cepat.</p>
                 <button class="btn-3d" data-src="assets/models/6ram.glb" data-title="Memori (RAM)">Tampilkan 3D</button>
@@ -204,7 +241,7 @@
 
             <!-- Item 7: Webcam -->
             <div class="menu-card card-primary">
-                <div class="card-icon">📷</div>
+                <img src="assets/images/7webcam.png" class="card-icon" alt="Webcam">
                 <h2>Webcam</h2>
                 <p>Kamera digital yang terhubung ke komputer untuk video.</p>
                 <button class="btn-3d" data-src="assets/models/7webcam.glb" data-title="Webcam">Tampilkan 3D</button>
@@ -212,7 +249,7 @@
 
             <!-- Item 8: Monitor -->
             <div class="menu-card card-secondary">
-                <div class="card-icon">🖥️</div>
+                <img src="assets/images/8monitor.png" class="card-icon" alt="Monitor">
                 <h2>Monitor</h2>
                 <p>Layar tampilan untuk melihat visual grafis dari komputer.</p>
                 <button class="btn-3d" data-src="assets/models/8monitor.glb" data-title="Monitor">Tampilkan 3D</button>
@@ -220,7 +257,7 @@
 
             <!-- Item 9: Speaker -->
             <div class="menu-card card-tertiary">
-                <div class="card-icon">🔊</div>
+                <img src="assets/images/9speaker.png" class="card-icon" alt="Speaker">
                 <h2>Speaker</h2>
                 <p>Perangkat output untuk menghasilkan suara dari komputer.</p>
                 <button class="btn-3d" data-src="assets/models/9speaker.glb" data-title="Speaker">Tampilkan 3D</button>
@@ -228,7 +265,7 @@
 
             <!-- Item 10: SSD -->
             <div class="menu-card card-primary">
-                <div class="card-icon">💽</div>
+                <img src="assets/images/10ssd.png" class="card-icon" alt="SSD">
                 <h2>Penyimpanan (SSD)</h2>
                 <p>Media penyimpanan data permanen dengan kecepatan tinggi.</p>
                 <button class="btn-3d" data-src="assets/models/10ssd_kit.glb" data-title="Penyimpanan (SSD)">Tampilkan
@@ -249,6 +286,14 @@
                 shadow-intensity="1">
             </model-viewer>
 
+            <div class="bg-switcher">
+                <p>Background:</p>
+                <button class="bg-btn bg-transparan" data-bg="transparent" title="Transparan"></button>
+                <button class="bg-btn bg-putih" data-bg="#ffffff" title="Putih"></button>
+                <button class="bg-btn bg-hitam" data-bg="#1e293b" title="Gelap"></button>
+                <button class="bg-btn bg-biru" data-bg="#e0c3fc" title="Biru"></button>
+            </div>
+
             <p style="margin-top: 15px; color: var(--text-light); font-size: 0.9rem;">
                 Geser untuk memutar • Cubit untuk zoom
             </p>
@@ -257,6 +302,8 @@
 
     <!-- Script Logika 3D Viewer -->
     <script src="assets/js/3d-viewer.js"></script>
+    <!-- Menghubungkan ke script dark mode -->
+    <script src="assets/js/theme-toggle.js"></script>
 </body>
 
 </html>

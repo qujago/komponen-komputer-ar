@@ -14,6 +14,48 @@
     --glass-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
 }
 
+[data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    --text-dark: #F8FAFC;
+    --text-light: #94A3B8;
+    --glass-bg: rgba(30, 41, 59, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+    --accent: #3B82F6;
+}
+
+body[data-theme="dark"] {
+    background: var(--bg-gradient);
+    color: var(--text-dark);
+}
+
+.theme-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dark);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+    background: var(--accent);
+    color: white;
+}
+
 /* Aksesibilitas Keyboard Global */
 *:focus-visible {
     outline: 3px solid var(--accent);
@@ -70,6 +112,11 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 999;
+}
+
+[data-theme="dark"] .btn-back-global {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .btn-back-global:hover {
@@ -201,6 +248,13 @@ body {
     align-items: center;
 }
 
+img.card-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto 15px auto; /* Adding bottom margin to match emoji spacing */
+}
+
 /* Jika Ikon menggunakan font (Phosphor Icons) */
 i.card-icon {
     font-size: 4.5rem;
@@ -211,6 +265,11 @@ i.card-icon {
     transform: translateY(-12px);
     box-shadow: 0 20px 40px rgba(31, 38, 135, 0.15);
     background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] .menu-card:hover {
+    background: rgba(40, 53, 75, 0.95);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* Pewarnaan Spesifik Ikon Vektor */

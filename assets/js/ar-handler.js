@@ -24,7 +24,11 @@ AFRAME.registerComponent('marker-handler', {
             // Ubah teks instruksi di layar
             const instruction = document.querySelector('.instructions p');
             if(instruction) {
-                instruction.innerText = "Gunakan tombol + / - atau cubit layar untuk Zoom.";
+                // Ambil nama dari elemen a-text
+                const textEl = marker.querySelector('a-text');
+                const markerName = textEl ? textEl.getAttribute('value') : "Perangkat Keras";
+                
+                instruction.innerHTML = `<strong>${markerName}</strong><br><span style="font-size: 0.9em; font-weight: normal;">Gunakan tombol + / - atau cubit layar untuk Zoom.</span>`;
                 instruction.style.background = "#E4F8ED"; // Ubah latar belakang jadi hijau pastel
                 instruction.style.color = "#2B3674";
             }

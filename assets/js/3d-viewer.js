@@ -27,6 +27,15 @@ btnClose.addEventListener('click', function() {
     viewerModel.src = ""; // Kosongkan src agar tidak membebani memori saat ditutup
 });
 
+// Fitur Ganti Background 3D Viewer
+const bgButtons = document.querySelectorAll('.bg-btn');
+bgButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        const bgValue = this.getAttribute('data-bg');
+        viewerModel.style.backgroundColor = bgValue;
+    });
+});
+
 // Tutup modal juga jika area gelap di luar kotak putih diklik
 window.addEventListener('click', function(event) {
     if (event.target === modal) {
